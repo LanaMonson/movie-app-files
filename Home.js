@@ -24,11 +24,29 @@ class Home extends Component {
         this.fetchItems(endpoint);
     }
 
+    loadMoreItems = () => {
+        let endpoint = '';
+        this.setState({ loading:true });
+
+        if (this.state.searchTerm === '') {
+            endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${this.state.currentPage + 1}`;
+        } else {
+            endpoint = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query${this.state.searchTerm}&page${this.state.currentPage +1}`;//template litteral
+        }
+        this.fetchItems(endpoint);
+    }
+
     fetchItems = (endpoint) => {
         fetch(endpoint)
         .then(result => result.json())
         .then(result => {
-            console.log(result);
+            this.setState({
+                movies: [...this.state.movies, ...result.results],//--> using spread syntax to grab old movies and add a new movies
+                heroImage: this.state.heroImage || result.results[0],//--> grab an image, from first movies in API fetch
+                loading: false, 
+                currentPage: result.page,//--> grabbing data from page (Inspect-> Console)
+                totalPages: result.total_pages,//
+            })
         })
     } 
 
