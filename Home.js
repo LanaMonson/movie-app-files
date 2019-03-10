@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+mport React, {Component} from 'react';
 import HeroImage from '../elements/HeroImage/HeroImage';
 import SearchBar from '../elements/SearchBar/SearchBar';
 import FourColGrid from '../elements/FourColGrid/FourColGrid';
@@ -14,8 +14,12 @@ class Home extends Component {
 
     render(){
         return(
-            <div>
-                Home
+            <div className="rmdb-home">
+                <HeroImage />
+                <SearchBar />
+                <FourColGrid />
+                <Spinner />
+                <LoadMoreBtn />  
             </div>
         )
     }
