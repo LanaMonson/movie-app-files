@@ -10,7 +10,17 @@ import './Home.css';
 
 class Home extends Component {
     state = {
+        movies: [],
+        HeroImage: null,
+        loading: false,
+        currentPage: 0,
+        totalPages: 0,
+        searchTerm: ''
+    }
 
+    componentDidMount() {
+        this.setState({ loading: true });
+        const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}`
     }
 
     render(){
