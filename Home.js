@@ -21,9 +21,18 @@ class Home extends Component {
     componentDidMount() {
         this.setState({ loading: true });
         const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+        this.fetchItems(endpoint);
     }
 
-    render(){
+    fetchItems = (endpoint) => {
+        fetch(endpoint)
+        .then(result => result.json())
+        .then(result => {
+            console.log(result);
+        })
+    } 
+
+    render() {
         return(
             <div className="rmdb-home">
                 <HeroImage />
