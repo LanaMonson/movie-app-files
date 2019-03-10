@@ -1,4 +1,4 @@
-mport React, {Component} from 'react';
+import React, {Component} from 'react';
 import HeroImage from '../elements/HeroImage/HeroImage';
 import SearchBar from '../elements/SearchBar/SearchBar';
 import FourColGrid from '../elements/FourColGrid/FourColGrid';
