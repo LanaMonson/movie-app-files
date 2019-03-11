@@ -99,8 +99,6 @@ class Home extends Component {
                         <LoadMoreBtn text="Load More" onClick={ this.loadMoreItems } />
                         : null }
                 </div>
-                <Spinner />
-                <LoadMoreBtn />  
             </div>
         )
     }
