@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import Header from '../elements/Header/Header';
 import Home from '../Home/Home';
+import Movie from '../Movie/Movie';
+import NorFound from '../elements/NotFound/NotFound';
 
 const App = () => {
     return(
@@ -11,7 +13,7 @@ const App = () => {
                 <Switch>
                     <Route path="/" component={ Home } exact />
                     <Route path="./:movieId" component={ Movie } exact />
-                    <Route component={ NotFound }/>
+                    <Route component={undefined} />
                 </Switch>
             </React.Fragment>
         </BrowserRouter>//line 13 :movieId - : colon - we specify here, its where we grab the movie ID
