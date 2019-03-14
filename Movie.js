@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {API_URL, API_KEY} from '../../config';
 import Navigation from '../elements/Navigation/Navigation';
 import MovieInfo from '../elements/MovieInfo/MovieInfo';
-import MovieInfoBar from '../elements/MovieInfoBar/MovieInfo';
+import MovieInfoBar from '../elements/MovieInfoBar/MovieInfoBar';
 import FourColGrid from '../elements/FourColGrid/FourColGrid';
 import Actor from '../elements/Actor/Actor';
 import Spinner from '../elements/Spinner/Spinner';
@@ -12,7 +12,7 @@ class Movie extends Component{
     state = { 
         movie: null,
         actors: null,
-        dirrectors: [],
+        directors: [],
         loading: false
     }
 
@@ -41,7 +41,7 @@ class Movie extends Component{
 
                         this.setState({
                             actors: result.cast,
-                            directors, 
+                            //directors, 
                             loadinfg: false
                         })
                     })
@@ -55,12 +55,26 @@ class Movie extends Component{
     render() {
         return (
             <div className="rmdb-movie">
-                <Navigation />
-                <MovieInfo />
-                <MovieInfoBar />
-                
-                <Spinner />
-            </div>//<FourColGrid /> add in line 61 later
+                {this.state.movie ? 
+                    <div>
+                        <Navigation movie={this.props.location.movieName} />
+                        <MovieInfo movie={this.state.movie} directors={this.state.directors} />
+                        <MovieInfoBar time={this.state.movie.runtime} budget={this.state.movie.budget} revenue={this.state.movie.revenue} />
+                    </div>
+                : null}//if we don't have a movie it will return a null
+                {this.state.actors ? 
+                    <div className="rmdb-movie-grid">
+                        <FourColGrid header={'Actors'}>   
+                            {this.state.actors.map((element, i) => {
+                                return <Actor key={i} actor={element} />
+                            })}
+                        </FourColGrid>
+                    </div>
+                    : null }
+                    {!this.state.actors && !this.state.loading ? <h1>No Movie Found!</h1> : null}
+                    {this.state.loading ? <Spinner /> : null}
+
+            </div>
         )
     }
 }
